@@ -1,0 +1,38 @@
+NAME "Modular Bees Hive"
+--Modified from BucketSt's Modular Hive
+
+EVERY 20 TICKS DO
+--Extracting from the Hive
+    INPUT FROM Hive
+    OUTPUT *Honey* TO Storage
+    OUTPUT *comb* TO BufferStorage
+    OUTPUT EXCEPT *comb*,gem TO Storage
+forget
+--Extracting honey from the Hive
+    INPUT fluid:: FROM Hive
+    OUTPUT fluid:: TO Storage
+forget
+
+--FOR WANNABEES
+    INPUT gem FROM Hive
+    OUTPUT gem TO Trash
+forget
+
+--Resupplying the Hive Modules
+    INPUT electrode* FROM Resupply
+    OUTPUT electrode* TO Overclocker
+forget
+
+--For Soul Treats
+    INPUT *Jelly FROM Resupply
+    OUTPUT *Jelly TO TreaterB
+
+--For Honey (for treats)
+    INPUT honey* FROM Resupply
+    OUTPUT honey* TO Treater
+END
+
+EVERY TICK DO
+    INPUT fe:: FROM Power TOP SIDE
+    OUTPUT fe:: TO Overclocker
+END

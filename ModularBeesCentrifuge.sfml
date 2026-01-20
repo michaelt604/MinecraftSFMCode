@@ -1,0 +1,48 @@
+NAME "Modular Bees Centrifuge"
+--Modified from BucketSt
+
+EVERY redstone pulse DO
+
+--INPUT (2 centrifuges, one without heater to produce wax)
+forget
+    INPUT *Honey* FROM Honeycombs
+    OUTPUT *Honey* TO EMPTY SLOTS IN ImportHoney
+forget
+    INPUT *comb* FROM Honeycombs
+    OUTPUT *comb* TO EMPTY SLOTS IN ImportHoney
+forget
+    INPUT *Honey* FROM Honeycombs
+    OUTPUT *Honey* TO HoneyCentrifuge SLOTS 9-11
+forget
+    INPUT *comb* FROM Buffer
+    OUTPUT *comb* TO EMPTY SLOTS IN Import
+forget
+    INPUT *comb* FROM Buffer
+    OUTPUT *comb* TO Centrifuge SLOTS 9-11
+forget
+--OUTPUT
+    INPUT fluid:: FROM HoneyCentrifuge
+    OUTPUT fluid:: TO Storage
+forget
+    INPUT FROM HoneyCentrifuge SLOTS 0-8
+    OUTPUT TO Storage
+forget
+    INPUT fluid:: FROM Centrifuge
+    OUTPUT fluid:: TO Storage
+forget
+    INPUT FROM Centrifuge SLOTS 0-8
+    OUTPUT TO Storage
+forget
+--Resupplying Centrifuge Modules
+    INPUT electrode* FROM Resupply
+    OUTPUT electrode* TO Overclocker
+forget
+    INPUT wax* FROM Resupply
+    OUTPUT wax* TO Gearbox
+END
+
+EVERY TICK DO
+    INPUT fe:: FROM Power TOP SIDE
+    OUTPUT fe:: TO Overclocker
+    OUTPUT fe:: TO Heater
+END
