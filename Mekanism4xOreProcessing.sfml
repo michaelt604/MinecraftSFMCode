@@ -5,22 +5,22 @@ EVERY redstone pulse DO
 --Raw -> Shard -> Clump -> Dirty Dust -> Dust
 forget
     INPUT *Raw* FROM Interface
-    OUTPUT RETAIN 64 EACH *Raw* TO EACH Injection LEFT SIDE
+    OUTPUT RETAIN 18 EACH *Raw* TO EACH Injection LEFT SIDE
 forget
     INPUT *Shard* FROM Injection RIGHT SIDE
     OUTPUT *Shard* TO EMPTY SLOTS IN Shards
 forget
     INPUT *Shard* FROM Shards
-    OUTPUT *Shard* TO EMPTY SLOTS IN Purification LEFT SIDE
+    OUTPUT RETAIN 18 EACH *Shard* TO EMPTY SLOTS IN EACH Purification LEFT SIDE
 forget
     INPUT *Clump* FROM Purification RIGHT SIDE
-    OUTPUT *Clump* TO EMPTY SLOTS IN Crusher LEFT SIDE
+    OUTPUT RETAIN 18 EACH *Clump* TO EMPTY SLOTS IN EACH Crusher LEFT SIDE
 forget
     INPUT *Dirty* FROM Crusher RIGHT SIDE
     OUTPUT *Dirty* TO DirtyBuffer
 forget
     INPUT *Dirty* FROM DirtyBuffer
-    OUTPUT RETAIN 64 EACH *Dirty* TO EMPTY SLOTS IN EACH Enrichment LEFT SIDE
+    OUTPUT RETAIN 36 EACH *Dirty* TO EMPTY SLOTS IN EACH Enrichment LEFT SIDE
 forget
     INPUT *Dust* FROM Enrichment RIGHT SIDE
     OUTPUT *Dust* TO Storage
